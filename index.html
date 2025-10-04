@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Descargar Extensión</title>
+  <title>BackOffice Addons</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -38,15 +38,14 @@
 </head>
 <body>
   <div class="card">
-    <h1>Descargar extensión</h1>
+    <h1>Descargar Extensión</h1>
     <p id="mensaje">Detectando tu navegador...</p>
     <a id="boton" class="button" href="#">Esperando...</a>
   </div>
 
   <script>
-    // Cambia estos enlaces por los tuyos:
     const enlaceChromeEdge = "https://chromewebstore.google.com/detail/backofficeaddons/jjgafdpambonebolfdfhcbfjdmhaldhb";
-    const enlaceFirefox = "https://teammexico7.github.io/BackOfficeUpdates/backofficeteammx-11.6.xpi"; // Debe estar en la misma carpeta o poner URL completa
+    const enlaceFirefox = "https://teammexico7.github.io/BackOfficeUpdates/backofficeteammx-11.6.xpi";
 
     function detectarNavegador() {
       const userAgent = navigator.userAgent;
@@ -62,12 +61,12 @@
       }
 
       if (/Chrome|Edg/.test(userAgent) && !/OPR/.test(userAgent)) {
-        mensaje.textContent = "Hemos detectado que usas Chrome o Edge.";
-        boton.textContent = "Ir a la tienda de complementos";
+        mensaje.textContent = "Instalar en Chrome";
+        boton.textContent = "Instalar Complemento";
         boton.href = enlaceChromeEdge;
       } else if (/Firefox/.test(userAgent)) {
-        mensaje.textContent = "Hemos detectado que usas Firefox.";
-        boton.textContent = "Descargar extensión (.xpi)";
+        mensaje.textContent = "Instalar en Firefox.";
+        boton.textContent = "Instalar Complemento";
         boton.href = enlaceFirefox;
       } else {
         mensaje.textContent = "Tu navegador no es compatible.";
