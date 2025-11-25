@@ -7,10 +7,14 @@
           "update_link": "https://teammexico7.github.io/BackOfficeUpdates/backofficeteammx-12.8.xpi"
         }
       ]
+    },
+    "{e80494f4-2ac2-416c-a720-39af282f2441}": {
+      "updates": [
+        {
+          "version": "15.404.3",
+          "update_link": "https://teammexico7.github.io/BackOfficeUpdates/backofficeteammx-15.404.3.xpi"
+        }
+      ]
     }
   }
 }
-
-
-
-
